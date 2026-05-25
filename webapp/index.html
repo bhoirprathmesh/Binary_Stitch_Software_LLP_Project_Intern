@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Market Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .top-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 15px;
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(255, 65, 108, 0.2), rgba(255, 75, 43, 0.05));
+            border: 1px solid rgba(255, 65, 108, 0.3);
+            color: white;
+        }
+        .main-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 120px; /* Space for nav */
+            min-height: 100vh;
+        }
+        .tab-content {
+            display: none;
+            animation: slideUp 0.6s ease-out;
+            padding: 0 2rem 4rem 2rem;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .landing-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 120px);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="floatingLinesBackground" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: auto;"></canvas>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <nav class="top-nav">
+        <button class="nav-btn active" onclick="switchTab('hero', this)"><i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i> Overview</button>
+        <button class="nav-btn" onclick="switchTab('broadcast', this)"><i data-lucide="tv" style="width:18px;height:18px;"></i> Broadcast</button>
+        <button class="nav-btn" onclick="switchTab('ticket', this)"><i data-lucide="ticket" style="width:18px;height:18px;"></i> Tickets</button>
+        <button class="nav-btn" onclick="switchTab('sponsorship', this)"><i data-lucide="handshake" style="width:18px;height:18px;"></i> Sponsors</button>
+        <button class="nav-btn" onclick="switchTab('merch', this)"><i data-lucide="shirt" style="width:18px;height:18px;"></i> Merchandise</button>
+    </nav>
+
+    <div class="main-container">
+        
+        <!-- Tab 1: Hero Overview -->
+        <div id="hero" class="tab-content active">
+            <div class="landing-page">
+                <div style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 2rem; background: rgba(255,255,255,0.05); padding: 0.8rem 1.5rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);">
+                    <i data-lucide="trophy" style="color: var(--accent-1); width: 20px; height: 20px;"></i>
+                    <span style="font-weight: 600; letter-spacing: 1px;">Sports.AI Framework</span>
+                </div>
+
+                <h1 class="gradient-text" style="font-family: 'Outfit'; font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px;">
+                    Next-Generation Franchise<br>Valuation Engine
+                </h1>
+                
+                <p style="color: var(--text-muted); font-size: clamp(1.1rem, 2vw, 1.4rem); max-width: 700px; margin-bottom: 3rem; line-height: 1.6;">
+                    A unified suite integrating predictive neural networks across Broadcast Viewership, Ticket Revenue, Merchandising, and Sponsorship modules to generate definitive sports market intelligence.
+                </p>
+
+                <div style="display: flex; gap: 20px;">
+                    <button onclick="switchTab('broadcast', document.querySelectorAll('.nav-btn')[1])" style="cursor: pointer; border: none; padding: 1.2rem 2.5rem; background: linear-gradient(45deg, var(--accent-1), var(--accent-2)); color: white; font-weight: bold; border-radius: 50px; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(255, 65, 108, 0.3); transition: transform 0.3s ease;">
+                         Explore Analysis Modules
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Broadcast -->
+        <div id="broadcast" class="tab-content">
+            <h2 class="gradient-text" style="font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i data-lucide="tv"></i> Broadcast Viewership Analytics</h2>
+            
+            <div class="kpi-grid">
+                <div class="glass-card kpi">
+                    <div class="kpi-details"><h3>54M</h3><p>Avg Match Viewership</p></div>
+                </div>
+                <div class="glass-card kpi">
+                    <div class="kpi-details"><h3>120M</h3><p>Peak Match (Finals)</p></div>
+                </div>
+                <div class="glass-card kpi">
+                    <div class="kpi-details"><h3>-2.4%</h3><p>Rain Impact Deviation</p></div>
+                </div>
+            </div>
+
+            <div class="glass-card chart-container" style="margin-bottom: 20px;">
+                <h3>Predictive Viewership Trends vs Historical</h3>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="viewershipChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="glass-card">
+                <h3>Viewership Forecast Panel</h3>
+                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                    <input type="text" value="RCB vs MI" readonly style="flex:1; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: white; border-radius: 8px;">
+                    <input type="text" value="Weekend Evening" readonly style="flex:1; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: white; border-radius: 8px;">
+                    <button id="predictBtn" style="padding: 10px 20px; background: var(--accent-1); border: none; color: white; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">Generate Prediction</button>
+                </div>
+                <!-- Dynamic Results Area -->
+                <div id="predictionResult" style="margin-top: 20px; font-size: 1.2rem; color: #00C9FF; text-align: center; display: none; padding: 15px; border: 1px dashed rgba(0, 201, 255, 0.5); border-radius: 8px;"></div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Tickets -->
+        <div id="ticket" class="tab-content">
+            <h2 class="gradient-text" style="font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i data-lucide="ticket"></i> Dynamic Ticket Forecasting</h2>
+            
+            <div class="kpi-grid">
+                <div class="glass-card kpi">
+                    <div class="kpi-details"><h3>₹2,450</h3><p>Avg Ticket Price</p></div>
+                </div>
+                <div class="glass-card kpi">
+                    <div class="kpi-details"><h3>84.5%</h3><p>Avg Stadium Occupancy</p></div>
+                </div>
+                <div class="glass-card kpi">
+                    <div class="kpi-details"><h3>₹4.2 Cr</h3><p>Total Revenue Predict</p></div>
+                </div>
+            </div>
+            
+            <div class="glass-card chart-container">
+                <h3>Seat Occupancy by Match & Venue</h3>
+                <div style="position: relative; height: 350px; width: 100%;">
+                    <canvas id="ticketChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Sponsorship -->
+        <div id="sponsorship" class="tab-content">
+            <h2 class="gradient-text" style="font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i data-lucide="handshake"></i> AI Sponsorship Valuation</h2>
+            
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <h3>Profitability Analysis Table</h3>
+                <div style="overflow-x: auto; margin-top: 15px;">
+                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border); color: var(--text-muted);">
+                                <th style="padding: 10px;">Sponsor Category</th>
+                                <th style="padding: 10px;">Est. Spend (Cr)</th>
+                                <th style="padding: 10px;">Projected Value (Cr)</th>
+                                <th style="padding: 10px;">Calculated ROI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 10px;">Title Sponsor</td>
+                                <td style="padding: 10px;">₹45.0</td>
+                                <td style="padding: 10px;">₹112.5</td>
+                                <td style="padding: 10px; color: #1E9600;">2.5x</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 10px;">Jersey Front</td>
+                                <td style="padding: 10px;">₹12.0</td>
+                                <td style="padding: 10px;">₹26.4</td>
+                                <td style="padding: 10px; color: #1E9600;">2.2x</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">Stadium Branding</td>
+                                <td style="padding: 10px;">₹5.5</td>
+                                <td style="padding: 10px;">₹9.3</td>
+                                <td style="padding: 10px; color: #F8B500;">1.7x</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="glass-card chart-container">
+                <h3>Sponsor Spend vs Realized Value Array</h3>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="sponsorChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 5: Merch -->
+        <div id="merch" class="tab-content">
+            <h2 class="gradient-text" style="font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i data-lucide="shirt"></i> Merchandising Trends</h2>
+            
+            <div class="charts-grid">
+                <div class="glass-card chart-container">
+                    <h3>Social Buzz vs Sales Revenue</h3>
+                    <div style="position: relative; height: 250px; width: 100%;">
+                        <canvas id="merchChart1"></canvas>
+                    </div>
+                </div>
+                <div class="glass-card chart-container flex-col">
+                    <h3>Performance Impact</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.9rem;">The correlation model indicates a massive spike when a team hits a 4-win streak.</p>
+                    <div style="background: rgba(30, 150, 0, 0.1); border: 1px solid rgba(30, 150, 0, 0.4); padding: 15px; border-radius: 10px; color: #1E9600; text-align: center; margin-top: auto;">
+                        <h4 style="font-size: 1.5rem;">+42%</h4>
+                        <p>Sales uplift during playoffs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

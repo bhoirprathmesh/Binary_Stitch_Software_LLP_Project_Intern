@@ -1,0 +1,91 @@
+Major Project
+
+### 1. *Ticket Sales Forecasting 
+***Inputs*: Team performance, opponent, weather, day of the week, historical ticket sales. 
+**ML Models*: Random Forest, XGBoost, LSTM (for time series). 
+**Outcome*: Optimize pricing, marketing campaigns, and staffing.
+
+🧠 Example Use Cases After Feature Addition
+📈 Pricing Optimization : Simulate attendance if ticket_price_avg is increased by 10% and marketing is doubled.
+📣 Marketing Allocation : Predict impact of extra $5000 marketing spend for low-demand matches.
+🧍‍♂️ Staffing Forecast : Predict needed security/staff based on expected attendance ± buffer.
+
+Columns in the dataset :
+1️⃣ dynamic_pricing_flag
+Meaning: Did the match use dynamic pricing (ticket prices change with demand, like surge pricing)?
+Values:
+0 → No dynamic pricing (fixed ticket price for all)
+1 → Yes, dynamic pricing was applied (prices adjusted before/during sales)
+👉 Useful for understanding whether flexible pricing affects ticket sales.
+
+2️⃣ holiday_flag
+Meaning: Did the match fall on a holiday or weekend?
+Values:
+0 → Regular working day (Mon–Fri)
+1 → Holiday or weekend (Saturday/Sunday in generated dataset, could also include public holidays if you have them)
+👉 Helps capture the effect of holidays on attendance and demand.
+
+3️⃣ promotion_flag
+Meaning: Was there a promotion/offer/discount campaign tied to ticket sales?
+Values:
+0 → No promotion (normal sales)
+1 → Promotion/discount/freebies offered
+👉 Helps measure marketing impact on attendance.
+
+4️⃣ special_event_flag
+Meaning: Was this match a special event (final, semi-final, big rivalry, celebrity appearance, etc.)?
+Values:
+0 → Regular match
+1 → Special/high-profile event
+👉 Useful for staffing optimization (finals and rivalry matches often need more security/staff).
+
+____________________________________________________________________________________________________________________________________________________________________________________________||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+### 2. Merchandise Sales Prediction 
+* Inputs: Player stats, recent wins/losses, ad campaigns, social sentiment. 
+* ML Models: Regression models, time series models. 
+* Outcome: Inventory and logistics optimization.
+
+performance_index ---> A numerical score indicating recent team performance or player form, typically between 0 and 1. ---> 0.75
+
+team_wins_last_5 ---> Number of wins the team had in the last 5 matches. ---> 3
+
+ad_campaign_spend ---> Amount of money spent on advertising campaigns recently (could be daily, weekly, etc.) ---> 10000.0
+
+sentiment_score	---> Score representing public sentiment or fan sentiment about the team or event (range: -1 to 1) ---> 0.2
+
+historical_avg_merch_sales ---> Average merchandise sales historically for similar events or teams. ---> 1500.0
+
+merch_sales_lag_1 ---> Merchandise sales in the immediately previous event or time period. ---> 1450.0
+
+merch_sales_lag_2 ---> Merchandise sales in the event before the previous one (two events ago). ---> 1600.0
+
+merch_sales_roll_3 ---> Rolling average merchandise sales over the last 3 events. ---> 1520.0
+
+days_since_last_match ---> Number of days since the last match was played. ---> 7
+
+month ---> Numeric month when the match/event is happening (1 = January, ..., 12 = December) ---> 10
+
+is_weekend ---> Binary indicator if the event is on a weekend (1 = Saturday or Sunday, 0 = Weekday) ---> 0
+
+team ---> Categorical variable representing the team playing or hosting the event ---> "TeamA"
+
+day_of_week ---> Numeric day of the week (0 = Monday, ..., 6 = Sunday) ---> 0 (Monday)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
