@@ -1,4 +1,4 @@
-# Pro Sports Market Business Analysis
+# Predicting Sports Market Business Analysis
 
 **Advanced Sports Market Forecasting** — An end-to-end machine learning and analytics platform for IPL (Indian Premier League) revenue streams: broadcast viewership, ticket sales, sponsorship value, and merchandise demand.
 
@@ -24,12 +24,12 @@ The system is built around IPL-style match data (teams, venues, dates, viewershi
 
 Professional sports leagues generate revenue across multiple channels. Without reliable forecasts, organizations risk:
 
-| Revenue stream | Pain point | What this project solves |
-|----------------|------------|---------------------------|
-| **Broadcast** | Uncertain TV/digital reach affects ad inventory pricing | Predict **total viewership (millions)** per match from teams, phase, time slot, rivalry flags, and historical lags |
-| **Tickets** | Fixed pricing and poor demand planning reduce fill rates and revenue | Forecast **average ticket price**, **tickets sold**, and **total revenue** using team ranks, weather, promotions, dynamic pricing, and venue capacity |
-| **Sponsorship** | Brands over- or under-bid without ROI visibility | Estimate **sponsor value (₹ Cr)** and **ROI multiple** from viewership, social buzz, spend, and category |
-| **Merchandise** | Overstocking or stockouts hurt margins | Predict **merch sales** and revenue from team form, ad spend, sentiment, and sales history (lags/rolling averages) |
+| Revenue stream  | Pain point                                                           | What this project solves                                                                                                                              |
+| --------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Broadcast**   | Uncertain TV/digital reach affects ad inventory pricing              | Predict **total viewership (millions)** per match from teams, phase, time slot, rivalry flags, and historical lags                                    |
+| **Tickets**     | Fixed pricing and poor demand planning reduce fill rates and revenue | Forecast **average ticket price**, **tickets sold**, and **total revenue** using team ranks, weather, promotions, dynamic pricing, and venue capacity |
+| **Sponsorship** | Brands over- or under-bid without ROI visibility                     | Estimate **sponsor value (₹ Cr)** and **ROI multiple** from viewership, social buzz, spend, and category                                              |
+| **Merchandise** | Overstocking or stockouts hurt margins                               | Predict **merch sales** and revenue from team form, ad spend, sentiment, and sales history (lags/rolling averages)                                    |
 
 **Practical use cases** (from project scope):
 
@@ -43,12 +43,12 @@ Professional sports leagues generate revenue across multiple channels. Without r
 
 ## 3. Dataset Overview
 
-| Dataset | Location | Approx. size | Target variable | Key inputs |
-|---------|----------|--------------|-----------------|------------|
-| **IPL broadcast viewership** | `Views/ipl_broadcast_viewership.csv` | ~10,000 matches | `total_viewership_millions` | Home/away team, tournament phase, day/time slot, city, broadcaster, marquee/rivalry/rain flags, TV/digital splits |
-| **Cricket ticket forecasting** | `Ticket/cricket_ticket_forecasting_dataset_updated.csv` | ~757 matches | `ticket_price_avg` (also derives tickets sold & revenue) | Teams, venue, ranks, weather, min/max price, dynamic pricing, holiday/promotion/special-event flags, ad spend, social/search trends, capacity, attendance |
-| **Sponsorship value** | `Sponser/sponsorship_value_cricket.csv` | ~10,000 records | `sponsor_value_est_crores_inr` | TV/digital viewership, social buzz, sentiment, brand recall, ad integration, on-screen time, sponsor category/format, spend, ROI |
-| **Merchandise sales** | `Merchandies/cricket_merch_sales_dataset.csv` | ~1,500+ rows | `merch_sales` | Team, performance index, wins in last 5, ad campaign spend, sentiment, historical averages |
+| Dataset                        | Location                                                | Approx. size    | Target variable                                          | Key inputs                                                                                                                                                |
+| ------------------------------ | ------------------------------------------------------- | --------------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **IPL broadcast viewership**   | `Views/ipl_broadcast_viewership.csv`                    | ~10,000 matches | `total_viewership_millions`                              | Home/away team, tournament phase, day/time slot, city, broadcaster, marquee/rivalry/rain flags, TV/digital splits                                         |
+| **Cricket ticket forecasting** | `Ticket/cricket_ticket_forecasting_dataset_updated.csv` | ~757 matches    | `ticket_price_avg` (also derives tickets sold & revenue) | Teams, venue, ranks, weather, min/max price, dynamic pricing, holiday/promotion/special-event flags, ad spend, social/search trends, capacity, attendance |
+| **Sponsorship value**          | `Sponser/sponsorship_value_cricket.csv`                 | ~10,000 records | `sponsor_value_est_crores_inr`                           | TV/digital viewership, social buzz, sentiment, brand recall, ad integration, on-screen time, sponsor category/format, spend, ROI                          |
+| **Merchandise sales**          | `Merchandies/cricket_merch_sales_dataset.csv`           | ~1,500+ rows    | `merch_sales`                                            | Team, performance index, wins in last 5, ad campaign spend, sentiment, historical averages                                                                |
 
 **Supporting / reference data** (Merchandise module):
 
@@ -72,15 +72,15 @@ Professional sports leagues generate revenue across multiple channels. Without r
 
 ## 4. Tools and Technologies
 
-| Category | Stack |
-|----------|--------|
-| **Language** | Python 3 |
-| **ML / data** | pandas, NumPy, scikit-learn, joblib |
-| **Visualization** | Matplotlib, Seaborn |
-| **Dashboards** | Streamlit |
-| **Analysis** | Jupyter Notebook |
-| **Front-end** | HTML5, CSS3, JavaScript, [Chart.js](https://www.chartjs.org/), Lucide icons |
-| **Models** | Random Forest Regressor, Gradient Boosting, ElasticNet (training scripts); time-series options (LSTM) noted in project docs for tickets |
+| Category          | Stack                                                                                                                                   |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **Language**      | Python 3                                                                                                                                |
+| **ML / data**     | pandas, NumPy, scikit-learn, joblib                                                                                                     |
+| **Visualization** | Matplotlib, Seaborn                                                                                                                     |
+| **Dashboards**    | Streamlit                                                                                                                               |
+| **Analysis**      | Jupyter Notebook                                                                                                                        |
+| **Front-end**     | HTML5, CSS3, JavaScript, [Chart.js](https://www.chartjs.org/), Lucide icons                                                             |
+| **Models**        | Random Forest Regressor, Gradient Boosting, ElasticNet (training scripts); time-series options (LSTM) noted in project docs for tickets |
 
 **Dependencies** — install via:
 
@@ -130,12 +130,12 @@ Major_final2/
 
 ### Module-specific methods
 
-| Module | Algorithm | Notes |
-|--------|-----------|--------|
-| **Viewership** | Preprocessing pipeline + tree models (RF / Gradient Boosting compared in notebook) | Best model saved as `best_broadcast_model.pkl`; app loads via `joblib` |
-| **Tickets** | Random Forest (`n_estimators=100`) on encoded categoricals | Predicts price; derives tickets sold & revenue from demand heuristics |
-| **Sponsorship** | Random Forest in sklearn `Pipeline` | Trains on dashboard load from CSV; outputs value in ₹ Cr and ROI multiple |
-| **Merchandise** | Random Forest with time-aware 80/20 split | Uses `performance_index`, sentiment, ad spend, and merch lags |
+| Module          | Algorithm                                                                          | Notes                                                                     |
+| --------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **Viewership**  | Preprocessing pipeline + tree models (RF / Gradient Boosting compared in notebook) | Best model saved as `best_broadcast_model.pkl`; app loads via `joblib`    |
+| **Tickets**     | Random Forest (`n_estimators=100`) on encoded categoricals                         | Predicts price; derives tickets sold & revenue from demand heuristics     |
+| **Sponsorship** | Random Forest in sklearn `Pipeline`                                                | Trains on dashboard load from CSV; outputs value in ₹ Cr and ROI multiple |
+| **Merchandise** | Random Forest with time-aware 80/20 split                                          | Uses `performance_index`, sentiment, ad spend, and merch lags             |
 
 ### Executive dashboard
 
